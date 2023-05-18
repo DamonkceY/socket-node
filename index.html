@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+        <script>
+            var socket = io("http://localhost:8080");
+
+            socket.on('connected', () => {
+                console.log('Connected to socket !');
+
+                console.log('Ping')
+                socket.emit('PING');
+
+                socket.on('PONG', () => {
+                    console.log('Pong');
+                })
+
+                socket.emit('startCounter');
+
+                socket.on('counterDetailReceived', (msg) => {
+                    console.log(msg);
+                })
+            })
+        </script>
+    </body>
+</html>
